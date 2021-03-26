@@ -1,3 +1,10 @@
+from selenium import webdriver
+import datetime, re, requests, io, time, random, string
+from bs4 import BeautifulSoup
+from credentials import username, password
+from pymongo import MongoClient
+client = MongoClient('localhost', 27017)
+
 class StockData:
     def __init__(self):
         '''Initialize an instance of StockData'''
