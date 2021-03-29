@@ -34,7 +34,20 @@ class StockData:
 
     def retrieve_data(self):
         '''Method use to retrieve stock data from Wallmine'''
-
+        #     we need to be on the site after login in order for this method to work
+        self.driver.find_element_by_xpath('//*[@id="homepage-heatmap"]/a/div[2]').click()
+        time.sleep(2)
+        text = self.driver.find_element_by_xpath('/html/body/main/section/div[4]/div/div/div[1]/div/div[1]/h1').text
+        if text == 'Free Stock Screener':
+            print('On the right page')
+        self.driver.find_element_by_xpath('/html/body/main/section/div[5]/form/div/div/div').click()
+        self.driver.find_element_by_xpath('/html/body/main/section/div[5]/div/div/div[1]/div/ul/li[1]/a').click()
+        time.sleep(1)
+        table_head = self.driver.find_element_by_xpath('/html/body/main/section/div[5]/div/div/div[2]/table/thead').text
+        table_body = self.driver.find_element_by_xpath('/html/body/main/section/div[5]/div/div/div[2]/table/tbody').text
+        raw_data = [table_head, table_body]
+    
+    return raw_data
     def parse_data(self):
         '''Method used to parse the data that was retrieved'''
 
